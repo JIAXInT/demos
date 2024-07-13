@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      #leo {
+        width: 200px;
+        height: 200px;
+        background-color: #f00;
+        position: absolute;
+        top: 0;
+        left: 0;
+        cursor: move;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="leo"></div>
+
+    <script>
+      var leo = document.getElementById("leo");
+      leo.onmousedown = function (e) {
+        var ev = e || event;
+        var needY = ev.clientY - leo.offsetTop;
+        var needX = ev.clientX - leo.offsetLeft;
+
+        document.onmousemove = function (e) {
+          var ev = e || event;
+          var x = ev.clientX - needX;
+          var y = ev.clientY - needY;
+          var maxX = innerWidth - leo.offsetWidth;
+          var maxY = innerHeight - leo.offsetHeight;
+          if (x < 0) x = 0;
+          if (y < 0) y = 0;
+          if (x > maxX) x = maxX;
+          if (y > maxY) y = maxY;
+
+          leo.style.left = x + "px";
+          leo.style.top = y + "px";
+        };
+        document.onmouseup = function () {
+          document.onmousemove = null;
+          document.onmouseup = null;
+        };
+      };
+    </script>
+  </body>
+</html>

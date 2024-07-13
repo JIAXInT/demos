@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <title>js便笺</title>
+
+    <style type="text/css">
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #ccc;
+      }
+
+      .note-container {
+        position: absolute;
+        width: 300px;
+        height: 400px;
+        background-color: #fff4af;
+        box-shadow: 0 3px 20px rgba(0, 0, 0, 0.25);
+        border-radius: 5px;
+        overflow: hidden;
+      }
+
+      .note-title {
+        position: relative;
+        width: 100%;
+        color: #000;
+        background-color: #e4be32;
+        user-select: none;
+        cursor: default;
+      }
+
+      .note-title h6 {
+        margin: 0;
+        padding-left: 15px;
+        font-size: 16px;
+        font-weight: 700;
+        height: 40px;
+        line-height: 40px;
+      }
+
+      .note-title .btn-close {
+        position: absolute;
+        height: 40px;
+        width: 40px;
+        line-height: 40px;
+        right: 0;
+        top: 0;
+        color: #000;
+        text-align: center;
+        text-decoration: none;
+      }
+
+      .note-title .btn-close:hover {
+        background-color: #c3a01e;
+        color: #fff;
+      }
+
+      .note-content {
+        height: 300px;
+        padding: 10px;
+        overflow-y: auto;
+        outline: none;
+      }
+
+      .note-footer {
+        height: 40px;
+        line-height: 40px;
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flex;
+        display: -o-flex;
+        display: flex;
+      }
+
+      .note-footer .btn-new,
+      .note-footer .btn-remove {
+        flex: 1;
+        width: 40px;
+        height: 40px;
+        color: #333;
+        text-align: center;
+        font-size: 16px;
+        font-weight: 700;
+        text-decoration: none;
+        outline: none;
+        border: none;
+        background-color: #e4be32;
+      }
+
+      .note-footer .btn-new:hover,
+      .note-footer .btn-remove:hover {
+        opacity: 0.7;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="note-container">
+      <div class="note-title">
+        <h6>便签</h6>
+        <a href="javascript:;" class="btn-close">&times;</a>
+      </div>
+      <div class="note-content" contenteditable="true"></div>
+      <div class="note-footer">
+        <button class="btn-new">新增笔记</button>
+        <button class="btn-remove">清空笔记</button>
+      </div>
+    </div>
+
+    <script>
+      /*
+        outerNode 最外层的元素
+        titleNode 标题元素
+        closeNode 关闭按钮元素
+        removeNode 清空按钮元素
+        contentNode 内容元素
+        newBtn 新增按钮元素
+      */
+      var outerNode = document.querySelector(".note-container");
+      var z = 10;
+
+      console.log(outerNode.childNodes[5]);
+
+      doDrag(outerNode);
+      // 拖拽功能的主函数
+      function doDrag(needOuterNode) {
+        var titleNode = needOuterNode.children[0];
+        var closeNode = titleNode.children[1];
+        var removeNode = needOuterNode.children[2].children[1];
+        var contentNode = needOuterNode.children[1];
+        var newBtn = needOuterNode.children[2].children[0];
+        var outerNodeHTML = needOuterNode.innerHTML;
+
+        // 新增按钮点击事件
+        newBtn.onclick = function () {
+          var oDiv = document.createElement("div");
+          oDiv.className = "note-container";
+          oDiv.innerHTML = outerNodeHTML;
+          z++;
+          oDiv.style.zIndex = z;
+          document.body.appendChild(oDiv);
+          doDrag(oDiv);
+        };
+
+        // 新增按钮鼠标按下事件
+        newBtn.onmousedown = function (e) {
+          z++;
+          needOuterNode.style.zIndex = z;
+        };
+
+        // 内容节点点击事件
+        contentNode.onclick = function (e) {
+          z++;
+          needOuterNode.style.zIndex = z;
+        };
+
+        // 标题节点鼠标按下事件
+        titleNode.onmousedown = function (e) {
+          var ev = e || event;
+          var needX = ev.clientX - needOuterNode.offsetLeft;
+          var needY = ev.clientY - needOuterNode.offsetTop;
+          z++;
+          needOuterNode.style.zIndex = z;
+          document.onmousemove = function (e) {
+            var ev = e || event;
+            var x = ev.clientX - needX;
+            var y = ev.clientY - needY;
+            if (x < 0) x = 0;
+            if (y < 0) y = 0;
+            var maxX = innerWidth - needOuterNode.offsetWidth;
+            var maxY = innerHeight - needOuterNode.offsetHeight;
+            if (x > maxX) x = maxX;
+            if (y > maxY) y = maxY;
+            needOuterNode.style.left = x + "px";
+            needOuterNode.style.top = y + "px";
+          };
+
+          document.onmouseup = function (e) {
+            document.onmousemove = null;
+            document.onmouseup = null;
+          };
+        };
+
+        // 关闭按钮点击事件
+        closeNode.onclick = function () {
+          needOuterNode.remove();
+        };
+
+        // 清空按钮点击事件
+        removeNode.onclick = function () {
+          contentNode.innerHTML = "";
+          z++;
+          needOuterNode.style.zIndex = z;
+        };
+      }
+    </script>
+  </body>
+</html>
