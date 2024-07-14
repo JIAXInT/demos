@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>简易文字查询修改器</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: #efefe7;
+      }
+      p {
+        background: #fff;
+        width: 600px;
+        padding: 50px;
+        font-family: "微软雅黑";
+        font-size: 16px;
+        line-height: 36px;
+        color: gray;
+      }
+      #wrap {
+        width: 800px;
+        margin: 50px auto;
+        position: relative;
+      }
+      #buttons {
+        width: 100px;
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+      #buttons a {
+        display: block;
+        text-decoration: none;
+        margin-bottom: 5px;
+        color: #fff;
+        width: 100px;
+        height: 40px;
+        line-height: 40px;
+        background: #c0c0c0;
+        text-align: center;
+        display: none;
+        font-weight: bold;
+        font-family: "微软雅黑";
+        font-size: 20px;
+      }
+      #buttons a:hover {
+        background: #94948c;
+      }
+      #buttons a:first-child {
+        background: #94948c;
+        display: block;
+      }
+      #toolbox {
+        border: 10px solid darkgrey;
+        width: 640px;
+        padding: 20px;
+        background: #e7e7e2;
+        font-size: 0;
+        display: none;
+        position: relative;
+      }
+      #toolbox span {
+        font-family: "微软雅黑";
+        font-size: 20px;
+        padding: 5px 20px;
+        cursor: pointer;
+      }
+      #toolbox span.active {
+        background: darkgrey;
+        color: #fff;
+      }
+      #search,
+      #replace {
+        border-top: 3px solid darkgrey;
+        margin-top: 3px;
+      }
+      #search input[type="text"],
+      #replace input[type="text"] {
+        margin: 20px 0px;
+        padding: 2px;
+        height: 24px;
+        width: 200px;
+        font-size: 24px;
+        margin-right: 10px;
+      }
+      #search input[type="button"],
+      #replace input[type="button"] {
+        margin: 20px 0;
+        height: 30px;
+        width: 56px;
+        font-size: 20px;
+        width: 100px;
+        height: 32px;
+        font-size: 14px;
+        color: gray;
+        position: relative;
+        top: -3px;
+      }
+      #close {
+        font-size: 24px;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        cursor: pointer;
+      }
+      #search input[type="button"] {
+        width: 100px;
+        height: 32px;
+        font-size: 14px;
+        color: gray;
+        position: relative;
+        top: -3px;
+      }
+    </style>
+  </head>
+  <body style="">
+    <div id="wrap">
+      <p id="txt">
+        尼采在《查拉图斯特拉如是说》中写道“这是一本献给所有人的书，也是一本无人能懂的书”。
+        我写这本书的目的完全就是让所有人满足对程序员的好奇，也让程序员同时感觉到自己职业的特殊性与不易性。
+        当然了，本书是由我的亲身经历组成，也算是人生的阅历组合，或许你可以从书中看到自己的影子，也或许你也书中也可以窥视到其他人的人性。
+        这里没有那么多大家都办不到的人生鸡汤，但是会有一些让咱们少走弯路的人生格言。当然，大家也可以把这本书当作娱乐的工具，因为有些内容也会让你感觉作者初入茅庐的笨拙及做事的风趣性，内容也只需要吐槽的心去阅读即可。
+        因为作者本身目前是一名学校的老师，所以书本内容会有很多的校园文化，会以一个程序员的视觉来正视学校的这个地方，所以大部分的节奏是轻松、诙谐、校园、幽默的，请大家可以安心食用。
+        总之呢，这本书一本既能了解所谓的程序员文化，又能以程序员的视角感觉到在社会中生存的一本书。
+        怎么样？那么就赶紧开始吧！
+      </p>
+      <div id="buttons">
+        <a href="javascript:" id="showNode">展开</a>
+        <a href="javascript:" style="display: none" class="needBtn">查找</a>
+        <a href="javascript:" style="display: none" class="needBtn">替换</a>
+      </div>
+      <div id="toolbox">
+        <div id="close">×</div>
+        <span class="active">查找</span>
+        <span class="">替换</span>
+        <div id="search" style="display: block" class="changeDom">
+          <input type="text" id="searchTxt" /><input
+            type="button"
+            value="查找"
+            id="searchBtn"
+          />
+        </div>
+        <div id="replace" style="display: none" class="changeDom">
+          <input type="text" id="changeTxt" /><input type="text" id="setTxt" />
+          <input type="button" value="替换" id="changeBtn" />
+        </div>
+      </div>
+    </div>
+
+    <script>
+      /*
+            获取页面元素
+            showNode: 展开按钮
+            needBtn: 查找、替换按钮
+            toolbox: 工具箱
+            toolTab: 工具箱中的按钮
+            search: 查找内容
+            replace: 替换内容
+            close: 关闭
+            changeDom: 切换查找、替换内容
+            searchBtn: 查找按钮
+            searchTxt: 查找输入框
+            txt: 文字内容
+            changeBtn: 替换按钮
+            changeTxt: 替换输入框
+            setTxt: 替换输入框
+      */
+      var showNode = document.getElementById("showNode");
+      var needBtn = document.getElementsByClassName("needBtn");
+      var toolbox = document.getElementById("toolbox");
+      var toolTab = document
+        .getElementById("toolbox")
+        .getElementsByTagName("span");
+      var search = document.getElementById("search");
+      var replace = document.getElementById("replace");
+      var close = document.getElementById("close");
+      var changeDom = document.getElementsByClassName("changeDom");
+      var searchBtn = document.getElementById("searchBtn");
+      var searchTxt = document.getElementById("searchTxt");
+      var txt = document.getElementById("txt");
+      var oldTxt = txt.innerHTML;
+      var changeBtn = document.getElementById("changeBtn");
+      var changeTxt = document.getElementById("changeTxt");
+      var setTxt = document.getElementById("setTxt");
+
+      /*
+            替换按钮点击事件处理函数
+      */
+      changeBtn.onclick = function () {
+        if (changeTxt.value == "") {
+          alert("请输入要替换的内容");
+        } else {
+          if (txt.innerHTML.indexOf(changeTxt.value) != -1) {
+            txt.innerHTML = txt.innerHTML.replaceAll(
+              changeTxt.value,
+              setTxt.value
+            );
+            changeTxt.value = setTxt.value = "";
+            oldTxt = txt.innerHTML;
+          } else {
+            alert("没有找到要替换的【" + changeTxt.value + "】内容");
+          }
+        }
+      };
+
+      /*
+            查找按钮点击事件处理函数
+      */
+      searchBtn.onclick = function () {
+        if (searchTxt.value == "") {
+          alert("请输入要查找的内容");
+        } else {
+          if (txt.innerHTML.indexOf(searchTxt.value) != -1) {
+            txt.innerHTML = oldTxt;
+            txt.innerHTML = txt.innerHTML.replaceAll(
+              searchTxt.value,
+              "<span style='color:red;background-color:yellow;'>" +
+                searchTxt.value +
+                "</span>"
+            );
+            searchTxt.value = "";
+          } else {
+            alert("没有找到要查找的【" + searchTxt.value + "】内容");
+          }
+        }
+      };
+
+      /*
+            工具箱按钮点击事件处理函数
+      */
+      for (var i = 0; i < toolTab.length; i++) {
+        toolTab[i].index = i;
+        toolTab[i].onclick = function () {
+          txt.innerHTML = oldTxt;
+          for (var j = 0; j < toolTab.length; j++) {
+            toolTab[j].className = "";
+            changeDom[j].style.display = "none";
+          }
+          this.className = "active";
+          changeDom[this.index].style.display = "block";
+        };
+      }
+
+      /*
+            展开按钮点击事件处理函数
+      */
+      showNode.onclick = function () {
+        for (var i = 0; i < needBtn.length; i++) {
+          needBtn[i].style.display = "block";
+        }
+      };
+
+      /*
+            关闭按钮点击事件处理函数
+      */
+      close.onclick = function () {
+        toolbox.style.display = "none";
+      };
+
+      /*
+            查找、替换按钮点击事件处理函数
+      */
+      for (var i = 0; i < needBtn.length; i++) {
+        needBtn[i].onclick = function () {
+          for (var j = 0; j < needBtn.length; j++) {
+            needBtn[j].style.display = "none";
+          }
+          toolbox.style.display = "block";
+          if (this.innerHTML == "查找") {
+            toolTab[0].className = "active";
+            toolTab[1].className = "";
+            search.style.display = "block";
+
+            replace.style.display = "none";
+          } else if (this.innerHTML == "替换") {
+            toolTab[1].className = "active";
+            toolTab[0].className = "";
+            search.style.display = "none";
+            replace.style.display = "block";
+          }
+        };
+      }
+    </script>
+  </body>
+</html>
