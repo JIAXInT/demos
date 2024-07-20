@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style type="text/css">
+      @charset "UTF-8";
+      [ng\:cloak],
+      [ng-cloak],
+      [data-ng-cloak],
+      [x-ng-cloak],
+      .ng-cloak,
+      .x-ng-cloak,
+      .ng-hide:not(.ng-hide-animate) {
+        display: none !important;
+      }
+      ng\:form {
+        display: block;
+      }
+      .ng-animate-shim {
+        visibility: hidden;
+      }
+      .ng-anchor {
+        position: absolute;
+      }
+    </style>
+
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <meta name="apple-wap-web-app-capable" content="yes" />
+    <meta
+      name="apple-wap-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <title>购物车</title>
+
+    <!-- <script src="./index/jquery-1.10.2.js"></script>
+    <script src="./index/jquery.min.js"></script> -->
+    <!-- ionic框架  css -->
+    <link href="./index/weixin.css" rel="stylesheet" type="text/css" />
+    <link href="./index/ionic.min.css" rel="stylesheet" type="text/css" />
+    <link href="./index/signin.css" rel="stylesheet" type="text/css" />
+    <link href="./index/share.css" rel="stylesheet" type="text/css" />
+    <!-- ionic框架  js   -->
+  </head>
+  <body
+    class="grade-a platform-browser platform-macintel platform-ready"
+    style=""
+  >
+    <div id="totop"><a></a></div>
+    <div class="header_box">
+      <div class="bar bar-header">
+        <div id="tite" class="h1 title" style="width: 72%; margin: 0 auto">
+          购物车
+        </div>
+      </div>
+    </div>
+    <div style="height: 44px"></div>
+
+    <form
+      method="post"
+      name="cart_form"
+      target="_self"
+      id="cart_form"
+      action="https://www.jq22.com/demo/jQueryGoodsCart201707120045/"
+    >
+      <!--list-->
+      <div class="commodity_list_box">
+        <div class="cart_top">
+          <span>商品清单</span>
+          <p id="weights">每个单位重量约25kg</p>
+          <div class="clear"></div>
+        </div>
+        <!--商品列表-->
+        <div class="commodity_box">
+          <div class="commodity_list">
+            <!--店名信息-->
+            <div class="tite_tim select">
+              <em aem="1" cart_id="84"></em>
+              <span>一号店</span>
+              <div class="clear"></div>
+            </div>
+            <!--商品-->
+            <ul class="commodity_list_term">
+              <li class="select">
+                <em class="apple" aem="0" cart_id="84"></em>
+                <img src="./index/33d332dbca4e027fbc270db34a1a915d.png" />
+                <div class="div_center">
+                  <h4>新疆苹果</h4>
+                  <span>50斤</span>
+                  <p class="now_value"><i>￥</i><b class="qu_su">123.00</b></p>
+                </div>
+                <div class="div_right">
+                  <i class="apple">-</i>
+                  <span class="zi">1</span>
+                  <input type="hidden" value="84" />
+                  <i class="apple">+</i>
+                </div>
+              </li>
+              <li class="select">
+                <em class="peach" aem="0" cart_id="84"></em>
+                <img
+                  class="tz"
+                  src="./index/u=38752233,691687939&fm=253&fmt=auto&app=120&f=JPEG.webp"
+                />
+                <div class="div_center">
+                  <h4>重庆桃子</h4>
+                  <span>50斤</span>
+                  <p class="now_value"><i>￥</i><b class="qu_su">25.00</b></p>
+                </div>
+                <div class="div_right">
+                  <i class="peach">-</i>
+                  <span class="zi">1</span>
+                  <input type="hidden" value="84" />
+                  <i class="peach">+</i>
+                </div>
+              </li>
+            </ul>
+            <!--优惠信息-->
+            <div class="shop_ul_bottom account_info_box">
+              <ul class="account_info">
+                <li class="i_text">
+                  <span class="info_name xi_cu">包邮</span>
+                  <span class="info_name">商家包邮</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="commodity_box">
+          <div class="commodity_list">
+            <!--店名信息-->
+            <div class="tite_tim select">
+              <em aem="2" cart_id="84"></em>
+              <span>二号店</span>
+              <div class="clear"></div>
+            </div>
+            <!--商品-->
+            <ul class="commodity_list_term">
+              <li class="select">
+                <em class="mango" aem="0" cart_id="84"></em>
+                <img
+                  class="mg"
+                  src="./index/u=422585645,3229296282&fm=253&fmt=auto&app=138&f=JPEG.webp"
+                />
+                <div class="div_center">
+                  <h4>甘肃芒果</h4>
+                  <span>50斤</span>
+                  <p class="now_value"><i>￥</i><b class="qu_su">210.00</b></p>
+                </div>
+                <div class="div_right">
+                  <i class="mango">-</i>
+                  <span class="zi">1</span>
+                  <input type="hidden" value="84" />
+                  <i class="mango">+</i>
+                </div>
+              </li>
+              <li class="select">
+                <em class="pineapple" aem="0" cart_id="84"></em>
+                <img
+                  class="bl"
+                  src="./index/u=170118809,1197349756&fm=253&fmt=auto&app=138&f=JPEG.webp"
+                />
+                <div class="div_center">
+                  <h4>武汉菠萝</h4>
+                  <span>50斤</span>
+                  <p class="now_value"><i>￥</i><b class="qu_su">412.00</b></p>
+                </div>
+                <div class="div_right">
+                  <i class="pineapple">-</i>
+                  <span class="zi">1</span>
+                  <input type="hidden" value="84" />
+                  <i class="pineapple">+</i>
+                </div>
+              </li>
+            </ul>
+            <!--优惠信息-->
+            <div class="shop_ul_bottom account_info_box">
+              <ul class="account_info">
+                <li class="i_text">
+                  <span class="info_name xi_cu">包邮</span>
+                  <span class="info_name">商家包邮</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- 商品列表 end -->
+      </div>
+      <!-- end -->
+
+      <!-- footer -->
+      <div style="height: 55px"></div>
+      <div class="settle_box">
+        <dl class="all_check select" id="allChoose">
+          <dt><span id="all_pitch_on"></span><em>全选</em></dt>
+        </dl>
+        <dl class="total_amount">
+          <dt>
+            合计：
+            <p id="allmoney">¥<b>0</b></p>
+          </dt>
+          <dd>不含运费</dd>
+        </dl>
+        <input type="hidden" name="gcs" id="gcs" />
+        <a class="settle_btn" href="javascript:void(0);" id="confirm_cart"
+          >结算</a
+        >
+        <a
+          class="settle_btn"
+          href="javascript:void(0);"
+          id="confirm_cart1"
+          onclick="big_cart_remove()"
+          >删除</a
+        >
+      </div>
+      <!-- end -->
+    </form>
+
+    <script>
+      var allJson = {
+        apple: {
+          price: 123,
+          number: 1,
+          choose: false,
+        },
+        peach: {
+          price: 25,
+          number: 1,
+          choose: false,
+        },
+        mango: {
+          price: 210,
+          number: 1,
+          choose: false,
+        },
+        pineapple: {
+          price: 412,
+          number: 1,
+          choose: false,
+        },
+      };
+
+      var allEm = document.getElementsByTagName("em"); //获取所有的em标签
+      var allI = document.getElementsByTagName("i"); //获取所有的i标签
+      var arrI = []; //存放需要的i标签
+      var allmoney = document.getElementById("allmoney"); //获取总价标签
+      var num = 0;
+      var allChoose = document.getElementById("allChoose"); //获取总价标签
+
+      allChoose.onclick = function () {
+        this.children[0].children[0].classList.toggle("pitch_on");
+        if (this.children[0].children[0].classList.contains("pitch_on")) {
+          for (var i = 0; i < allEm.length - 1; i++) {
+            allEm[i].classList.add("pitch_on");
+          }
+          for (var i in allJson) {
+            allJson[i].choose = true;
+          }
+        } else {
+          for (var i = 0; i < allEm.length - 1; i++) {
+            allEm[i].classList.remove("pitch_on");
+          }
+          for (var i in allJson) {
+            allJson[i].choose = false;
+          }
+        }
+        moneyChange();
+      };
+
+      for (var i = 0; i < allI.length; i++) {
+        if (allI[i].innerHTML != "￥") {
+          arrI.push(allI[i]);
+        }
+      }
+
+      for (var i = 0; i < arrI.length; i++) {
+        arrI[i].onclick = function () {
+          changeJson(this.className, this);
+        };
+      }
+
+      var bl = false;
+
+      for (var i = 0; i < allEm.length - 1; i++) {
+        allEm[i].onclick = function () {
+          this.classList.toggle("pitch_on");
+          if (this.className == " " || this.className == "pic_on") {
+            if (this.getAttribute("aem") == "1") {
+              if (this.classList.contains("pitch_on")) {
+              } else {
+              }
+            } else {
+            }
+          } else {
+            if (this.classList.contains("pitch_on")) {
+              allJson[this.className.split(" ")[0]].choose = true;
+            } else {
+              allJson[this.className.split(" ")[0]].choose = false;
+            }
+          }
+
+          for (var i = 0; i < allEm.length - 1; i++) {}
+
+          moneyChange();
+        };
+      }
+
+      function moneyChange() {
+        for (var i in allJson) {
+          if (allJson[i].choose) {
+            num += allJson[i].price * allJson[i].number;
+          }
+        }
+        allmoney.innerHTML = "￥" + num;
+        num = 0;
+      }
+
+      function changeJson(className, obj) {
+        if (obj.innerHTML == "+") {
+          allJson[className].number++;
+          obj.parentNode.children[1].innerHTML = allJson[className].number;
+        } else {
+          if (allJson[className].number == 0) {
+            return;
+          }
+          allJson[className].number--;
+          obj.parentNode.children[1].innerHTML = allJson[className].number;
+        }
+        moneyChange();
+      }
+    </script>
+  </body>
+</html>
