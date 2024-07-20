@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <title>网页随机抽奖效果</title>
+    <link rel="stylesheet" type="text/css" href="./image/index.css" />
+    <style type="text/css">
+      #lottery {
+        margin-top: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="lottery">
+      <table border="0" cellpadding="0" cellspacing="0">
+        <tbody>
+          <tr>
+            <td class="lottery-unit lottery-unit-0">
+              <img src="./image/gift0.jpg" />
+              <div class="mask"></div>
+            </td>
+            <td class="lottery-unit lottery-unit-1">
+              <img src="./image/gift1.jpg" />
+              <div class="mask"></div>
+            </td>
+            <td class="lottery-unit lottery-unit-2">
+              <img src="./image/gift2.jpg" />
+              <div class="mask"></div>
+            </td>
+          </tr>
+          <tr>
+            <td class="lottery-unit lottery-unit-7">
+              <img src="./image/gift7.jpg" />
+              <div class="mask"></div>
+            </td>
+            <td class="btn" id="btn"><img src="./image/lottery1.jpg" /></td>
+            <td class="lottery-unit lottery-unit-3">
+              <img src="./image/gift3.jpg" />
+              <div class="mask"></div>
+            </td>
+          </tr>
+          <tr>
+            <td class="lottery-unit lottery-unit-6">
+              <img src="./image/gift6.jpg" />
+              <div class="mask"></div>
+            </td>
+            <td class="lottery-unit lottery-unit-5">
+              <img src="./image/gift5.jpg" />
+              <div class="mask"></div>
+            </td>
+            <td class="lottery-unit lottery-unit-4">
+              <img src="./image/gift4.jpg" />
+              <div class="mask"></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <script>
+      // 获取抽奖按钮和所有抽奖单元格
+      var btn = document.getElementById("btn");
+      var allDom = document.getElementsByClassName("lottery-unit");
+      var timer = 500;
+      var Quan = 20;
+      var startQuan = 0;
+      var last = 0;
+      var kg = false;
+
+      // 抽奖动画函数
+      function to() {
+        var n = parseInt(Math.random() * allDom.length);
+        if (n == last) {
+          to();
+          return;
+        }
+        last = n;
+        for (var i = 0; i < allDom.length; i++) {
+          allDom[i].classList.remove("active");
+        }
+        document
+          .getElementsByClassName("lottery-unit-" + n)[0]
+          .classList.add("active");
+
+        if (timer > 500) {
+          timer = 500;
+          startQuan = 0;
+          kg = false;
+          return;
+        } else {
+          if (startQuan == Quan) {
+            timer += 30;
+          } else {
+            if (timer < 30) {
+              startQuan++;
+            } else {
+              timer -= 30;
+            }
+          }
+        }
+
+        setTimeout(function () {
+          to();
+        }, timer);
+      }
+
+      // 按钮点击事件处理函数
+      btn.onclick = function () {
+        if (kg) return;
+        kg = true;
+        to();
+      };
+    </script>
+  </body>
+</html>
